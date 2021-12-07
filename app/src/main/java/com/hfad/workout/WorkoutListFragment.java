@@ -3,21 +3,19 @@ package com.hfad.workout;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.ListFragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
+import android.widget.ArrayAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link WorkoutDetailFragment#newInstance} factory method to
+ * Use the {@link WorkoutListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class WorkoutDetailFragment extends Fragment {
+public class WorkoutListFragment extends ListFragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,9 +25,8 @@ public class WorkoutDetailFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private long workoutId;
 
-    public WorkoutDetailFragment() {
+    public WorkoutListFragment() {
         // Required empty public constructor
     }
 
@@ -39,11 +36,11 @@ public class WorkoutDetailFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment WorkoutDetailFragment.
+     * @return A new instance of fragment WorkoutListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WorkoutDetailFragment newInstance(String param1, String param2) {
-        WorkoutDetailFragment fragment = new WorkoutDetailFragment();
+    public static WorkoutListFragment newInstance(String param1, String param2) {
+        WorkoutListFragment fragment = new WorkoutListFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,25 +60,10 @@ public class WorkoutDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_workout_detail, container, false);
-    }
 
-    public void setWorkout(long id){
-        this.workoutId = id;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        View view = getView();
-        if (view != null){
-            TextView title = (TextView) view.findViewById(R.id.textTitle);
-            Log.d("TextView.setText",title.toString());
-            Workout workout = Workout.workouts[(int) workoutId];
-            title.setText(workout.getName());
-            TextView description = (TextView) view.findViewById(R.id.textDescription);
-            description.setText(workout.getDescription());
-        }
+        String names[] = {"Back","Check","Legs"};
+        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1,names);
+        setListAdapter(listAdapter);
+        return super.onCreateView(inflater,container,savedInstanceState);
     }
 }
