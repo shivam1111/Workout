@@ -3,8 +3,9 @@ package com.hfad.workout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements WorkoutListFragment.WorkoutListListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,4 +14,11 @@ public class MainActivity extends AppCompatActivity {
         WorkoutDetailFragment frag = (WorkoutDetailFragment) getSupportFragmentManager().findFragmentById(R.id.detail_frag);
         frag.setWorkout(1);
     }
+
+    @Override
+    public void itemClicked(long id){
+        // Code
+        Log.d("Fragement","Fragment click checked");
+    }
+
 }
