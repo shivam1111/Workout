@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout-large/activity_main.xml" value="0.12578125" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/fragment_stopwatch.xml" value="0.26132246376811596" />
         <entry key="app/src/main/res/layout/fragment_workout_detail.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/fragment_workout_list.xml" value="0.16770833333333332" />
       </map>
