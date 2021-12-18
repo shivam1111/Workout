@@ -6,12 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class StopWatchFragment extends Fragment {
+public class StopWatchFragment extends Fragment implements View.OnClickListener {
 
     private int seconds = 0;
     private boolean running;
@@ -19,6 +21,21 @@ public class StopWatchFragment extends Fragment {
 
     public StopWatchFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onClick(View v) {
+       switch(v.getId()){
+           case R.id.start_button:
+               onClickStart(v);
+               break;
+           case R.id.stop_button:
+               onClickStop(v);
+               break;
+           case R.id.reset_button:
+               onClickReset(v);
+               break;
+       }
     }
 
     @Override
@@ -39,6 +56,12 @@ public class StopWatchFragment extends Fragment {
                              Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_stopwatch, container, false);
         runTimer(layout);
+        Button startButton = (Button) layout.findViewById(R.id.start_button);
+        startButton.setOnClickListener(this);
+        Button stopButton = (Button) layout.findViewById(R.id.stop_button);
+        stopButton.setOnClickListener(this);
+        Button resetButton = (Button) layout.findViewById(R.id.reset_button);
+        resetButton.setOnClickListener(this);
         return layout;
 
     }
@@ -83,11 +106,13 @@ public class StopWatchFragment extends Fragment {
     }
 
     public void runTimer(View view){
+
         final TextView timerView = view.findViewById(R.id.time_view);
         final Handler handler = new Handler();
         handler.post(new Runnable(){
             @Override
             public void run() {
+                Log.d("runTimer",""+seconds);
                 int hours = seconds/3600;
                 int minutes = (seconds%3600)/60;
                 int secs = seconds%60;
@@ -100,6 +125,4 @@ public class StopWatchFragment extends Fragment {
             }
         });
     }
-
-
 }
